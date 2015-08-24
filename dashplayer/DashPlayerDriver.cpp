@@ -119,7 +119,7 @@ status_t DashPlayerDriver::setVideoSurfaceTexture(
 
     mSetSurfaceInProgress = true;
 
-  mPlayer->setVideoSurfaceTexture(bufferProducer);
+    mPlayer->setVideoSurfaceTexture(bufferProducer);
 
     while (mSetSurfaceInProgress) {
        mCondition.wait(mLock);
@@ -333,6 +333,7 @@ status_t DashPlayerDriver::invoke(const Parcel &request, Parcel *reply) {
          ret = getParameter(methodId,reply);
          break;
        }
+
        case KEY_DASH_QOE_EVENT:
            DPD_MSG_HIGH("calling KEY_DASH_QOE_EVENT");
            ret = setParameter(methodId,request);
