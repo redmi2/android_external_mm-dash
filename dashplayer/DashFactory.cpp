@@ -41,21 +41,17 @@ class DashPlayerFactory : public MediaPlayerFactory::IFactory {
             if (len >= 5 && !strcasecmp(".mpd", &url[len - 4])) {
                 return kOurScore;
             }
-
-            if (strstr(url,"mpd")) {
-                return kOurScore;
-            }
         }
         return 0.0;
     }
 
     virtual float scoreFactory(const sp<IMediaPlayer>& /*client*/,
-                               const sp<IStreamSource>& /*source*/,
+                               const sp<IStreamSource> & /*source*/,
                                float /*curScore*/) {
         return 0.0;
     }
 
-    virtual sp<MediaPlayerBase> createPlayer() {
+    virtual sp<MediaPlayerBase> createPlayer(pid_t /*pid*/) {
         return new DashPlayerDriver;
     }
 };
