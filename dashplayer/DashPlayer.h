@@ -306,6 +306,7 @@ private:
     int64_t mVideoDecoderStartTimeUs;
     int64_t mVideoDecoderSetupTimeUs;
     int64_t mDelayRenderingUs;
+    bool    mStarted;
     int64_t mFirstVideoSampleUs;
     int64_t mVideoSampleDurationUs;
 
