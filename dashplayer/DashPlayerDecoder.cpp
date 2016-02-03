@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The Android Open Source Project
+ * Copyright (C) 2015-2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -694,31 +694,31 @@ static void dumpBytePair(const sp<ABuffer> &ccBuf)
     if (cc->mData1 >= 0x20 && cc->mData1 <= 0x7f)
     {
       // 2 basic chars
-      sprintf(tmp, "[%d]Basic: %c %c", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]Basic: %c %c", cc->mType, cc->mData1, cc->mData2);
     }
     else if ((cc->mData1 == 0x11 || cc->mData1 == 0x19)
             && cc->mData2 >= 0x30 && cc->mData2 <= 0x3f)
     {
       // 1 special char
-      sprintf(tmp, "[%d]Special: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]Special: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     else if ((cc->mData1 == 0x12 || cc->mData1 == 0x1A)
              && cc->mData2 >= 0x20 && cc->mData2 <= 0x3f)
     {
       // 1 Spanish/French char
-      sprintf(tmp, "[%d]Spanish: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]Spanish: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     else if ((cc->mData1 == 0x13 || cc->mData1 == 0x1B)
              && cc->mData2 >= 0x20 && cc->mData2 <= 0x3f)
     {
       // 1 Portuguese/German/Danish char
-      sprintf(tmp, "[%d]German: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]German: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     else if ((cc->mData1 == 0x11 || cc->mData1 == 0x19)
              && cc->mData2 >= 0x20 && cc->mData2 <= 0x2f)
     {
       // Mid-Row Codes (Table 69)
-      sprintf(tmp, "[%d]Mid-row: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]Mid-row: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     else if (((cc->mData1 == 0x14 || cc->mData1 == 0x1c)
               && cc->mData2 >= 0x20 && cc->mData2 <= 0x2f)
@@ -727,18 +727,18 @@ static void dumpBytePair(const sp<ABuffer> &ccBuf)
               && cc->mData2 >= 0x21 && cc->mData2 <= 0x23))
     {
       // Misc Control Codes (Table 70)
-      sprintf(tmp, "[%d]Ctrl: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]Ctrl: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     else if ((cc->mData1 & 0x70) == 0x10
             && (cc->mData2 & 0x40) == 0x40
             && ((cc->mData1 & 0x07) || !(cc->mData2 & 0x20)) )
     {
       // Preamble Address Codes (Table 71)
-      sprintf(tmp, "[%d]PAC: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]PAC: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     else
     {
-      sprintf(tmp, "[%d]Invalid: %02x %02x", cc->mType, cc->mData1, cc->mData2);
+      snprintf(tmp, sizeof(tmp), "[%d]Invalid: %02x %02x", cc->mType, cc->mData1, cc->mData2);
     }
     if (out.size() > 0)
     {
