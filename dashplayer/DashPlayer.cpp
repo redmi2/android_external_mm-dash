@@ -1812,24 +1812,6 @@ void DashPlayer::renderBuffer(bool audio, const sp<AMessage> &msg) {
                                               * VENUS_UV_SCANLINES(COLOR_FMT_NV12, mCurrentHeight));
                 allocLen = VENUS_BUFFER_SIZE(COLOR_FMT_NV12, mCurrentWidth, mCurrentHeight);
               }
-              else if (mColorFormat == 0x7FA30C06 /*QOMX_COLOR_FORMATYUV420PackedSemiPlanar32mCompressed*/)
-              {
-                unsigned int y_stride = VENUS_Y_STRIDE(COLOR_FMT_NV12_UBWC, mCurrentWidth);
-                unsigned int uv_stride = VENUS_UV_STRIDE(COLOR_FMT_NV12_UBWC, mCurrentWidth);
-                unsigned int y_sclines = VENUS_Y_SCANLINES(COLOR_FMT_NV12_UBWC, mCurrentHeight);
-                unsigned int uv_sclines = VENUS_UV_SCANLINES(COLOR_FMT_NV12_UBWC, mCurrentHeight);
-                unsigned int y_ubwc_plane = MSM_MEDIA_ALIGN(y_stride * y_sclines, 4096);
-                unsigned int uv_ubwc_plane = MSM_MEDIA_ALIGN(uv_stride * uv_sclines, 4096);
-                unsigned int y_meta_stride = VENUS_Y_META_STRIDE(COLOR_FMT_NV12_UBWC, mCurrentWidth);
-                unsigned int y_meta_scanlines = VENUS_Y_META_SCANLINES(COLOR_FMT_NV12_UBWC, mCurrentHeight);
-                unsigned int y_meta_plane = MSM_MEDIA_ALIGN(y_meta_stride * y_meta_scanlines, 4096);
-                unsigned int uv_meta_stride = VENUS_UV_META_STRIDE(COLOR_FMT_NV12_UBWC, mCurrentWidth);
-                unsigned int uv_meta_scanlines = VENUS_UV_META_SCANLINES(COLOR_FMT_NV12_UBWC, mCurrentHeight);
-                unsigned int uv_meta_plane = MSM_MEDIA_ALIGN(uv_meta_stride * uv_meta_scanlines, 4096);
-
-                filledLen = y_ubwc_plane + uv_ubwc_plane + y_meta_plane + uv_meta_plane;
-                allocLen = VENUS_BUFFER_SIZE(COLOR_FMT_NV12_UBWC, mCurrentWidth, mCurrentHeight);
-              }
 
               if (filledLen > 0 && allocLen > 0)
               {
