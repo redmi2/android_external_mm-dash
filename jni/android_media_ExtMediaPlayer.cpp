@@ -106,7 +106,7 @@ void JNIExtMediaPlayerListener::notify(int msg, int ext1, int ext2, const Parcel
             }
         }
     } else {
-        if((extfields.ext_post_event != NULL) &&
+        if(env && (extfields.ext_post_event != NULL) &&
             ((msg == MEDIA_PREPARED) || (msg == MEDIA_TIMED_TEXT) ||(msg == MEDIA_QOE)))
         {
             ALOGD("JNIExtMediaPlayerListener::notify calling ext_post_events");
